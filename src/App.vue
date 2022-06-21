@@ -1,6 +1,13 @@
 <template>
   <div>
-    <HeaderApp />
+    <HeaderApp v-show="showHeader" />
+    <div>
+      Nome: {{ name }}
+      Idade: {{ age }}
+    </div>
+    <div v-if="accessLevel === 'admin'">Admin</div>
+    <div v-else-if="accessLevel === 'marketing'">Marketing</div>
+    <div v-else>User</div>
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
   </div>
@@ -16,6 +23,14 @@ export default defineComponent({
   components: {
     HelloWorld,
     HeaderApp,
+  },
+  data() {
+    return {
+      showHeader: true,
+      name: 'dcmatheus',
+      age: 19,
+      accessLevel: 'marketing',
+    };
   },
 });
 </script>

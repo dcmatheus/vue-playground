@@ -10,11 +10,13 @@
     <div v-else>User</div>
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <TodoList />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import TodoList from './components/TodoList.vue';
 import HelloWorld from './components/HelloWorld.vue';
 import HeaderApp from './components/HeaderApp.vue';
 
@@ -23,6 +25,7 @@ export default defineComponent({
   components: {
     HelloWorld,
     HeaderApp,
+    TodoList,
   },
   data() {
     return {

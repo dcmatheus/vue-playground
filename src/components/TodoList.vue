@@ -1,7 +1,13 @@
 <template>
-  <div>
-    <li v-for="todo in todos" :key="todo.id">{{ todo.title }}</li>
-  </div>
+  <ol>
+    <li
+      v-for="(todo, index) in todos"
+      :class="[...styles, (index == 0 ? 'first' : '')]"
+      style="margin-bottom: 1rem"
+      :style="{ marginLeft: '10rem' }"
+      :key="todo.id"
+    >{{ todo.title }}</li>
+  </ol>
 </template>
 
 <script lang="ts">
@@ -12,7 +18,22 @@ export default {
   data() {
     return {
       todos,
+      styles: ['bg', 'light'],
     };
   },
 };
 </script>
+
+<style scoped>
+
+  .bg {
+    background-color: blue;
+  }
+
+  .light {
+    color: #333;
+  }
+  .first {
+    color: red;
+  }
+</style>

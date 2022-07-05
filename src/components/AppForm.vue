@@ -12,6 +12,12 @@
     </label>
     <p>{{ email }}</p>
     <div>
+      <input v-model="array" type="checkbox" value="blue">Azul
+      <input v-model="array" type="checkbox" value="red">Vermelho
+      <input v-model="array" type="checkbox" value="green">Verde
+      {{ array }}
+    </div>
+    <div>
       <h3>Acompanha NBA?</h3>
       <label for="yes">
         <input type="radio" v-model="accompaniesNBA" value="Sim" id="yes" />
@@ -56,6 +62,7 @@ export default {
       franchises,
       franchise: '',
       terms: false,
+      array: [],
     };
   },
 };

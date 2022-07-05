@@ -8,24 +8,23 @@
     <div v-if="accessLevel === 'admin'">Admin</div>
     <div v-else-if="accessLevel === 'marketing'">Marketing</div>
     <div v-else>User</div>
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
     <TodoList />
+    <AppForm />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import AppForm from './components/AppForm.vue';
 import TodoList from './components/TodoList.vue';
-import HelloWorld from './components/HelloWorld.vue';
 import HeaderApp from './components/HeaderApp.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld,
     HeaderApp,
     TodoList,
+    AppForm,
   },
   data() {
     return {

@@ -3,8 +3,8 @@
     <li
       v-for="(todo, index) in todos"
       :class="[...styles, (index == 0 ? 'first' : '')]"
-      style="margin-bottom: 1rem"
-      :style="{ marginLeft: '10rem' }"
+      style="font-size: 1.2rem"
+      :style="{ margin: '1rem' }"
       :key="todo.id"
     >{{ todo.title }}</li>
   </ol>
@@ -27,7 +27,7 @@ export default {
 <style scoped>
 
   .bg {
-    background-color: blue;
+    background-color: #f5f5f5;
   }
 
   .light {

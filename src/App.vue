@@ -1,13 +1,7 @@
 <template>
   <div>
     <HeaderApp v-show="showHeader" />
-    <div>
-      Nome: {{ name }}
-      Idade: {{ age }}
-    </div>
-    <div v-if="accessLevel === 'admin'">Admin</div>
-    <div v-else-if="accessLevel === 'marketing'">Marketing</div>
-    <div v-else>User</div>
+    <UserComponent />
     <TodoList />
     <AppForm />
   </div>
@@ -18,6 +12,7 @@ import { defineComponent } from 'vue';
 import AppForm from './components/AppForm.vue';
 import TodoList from './components/TodoList.vue';
 import HeaderApp from './components/HeaderApp.vue';
+import UserComponent from './components/UserComponent.vue';
 
 export default defineComponent({
   name: 'App',
@@ -25,13 +20,11 @@ export default defineComponent({
     HeaderApp,
     TodoList,
     AppForm,
+    UserComponent,
   },
   data() {
     return {
       showHeader: true,
-      name: 'dcmatheus',
-      age: 19,
-      accessLevel: 'marketing',
     };
   },
 });

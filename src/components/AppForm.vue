@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent="submit">
     <h1>Assine nossa newsletter e acompanhe as últimas notícias da NBA</h1>
     <label for="name">
       Nome
@@ -11,11 +11,21 @@
       <input type="email" v-model="email" class="form-control" id="email" placeholder="E-mail"/>
     </label>
     <p>{{ email }}</p>
-    <div>
-      <input v-model="array" type="checkbox" value="blue">Azul
+    <div ref="teste">
+      <input
+        v-model="array"
+        type="checkbox"
+        @click.middle="events('teste', $event)"
+        value="blue"
+      >
+      Azul
       <input v-model="array" type="checkbox" value="red">Vermelho
       <input v-model="array" type="checkbox" value="green">Verde
-      {{ array }}
+      <p
+        @copy="emptyArray"
+      >
+        {{ array }}
+      </p>
     </div>
     <div>
       <h3>Acompanha NBA?</h3>
@@ -45,14 +55,15 @@
       <input type="checkbox" v-model="terms" id="terms" />
       Li e concordo com os termos do contrato.
     </label>
-    <input v-if="terms" type="submit" value="Assinar" />
+    <button v-if="terms" type="submit">Assinar</button>
   </form>
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
 import franchises from '../utils/franchises.json';
 
-export default {
+export default defineComponent({
   name: 'AppForm',
   data() {
     return {
@@ -63,7 +74,36 @@ export default {
       franchise: '',
       terms: false,
       array: [],
+      teste: this.$refs.teste as ((payload: FocusEvent) => void),
     };
   },
-};
+  methods: {
+    submit($evt: Event) {
+      this.empty();
+      console.log(
+        this.email,
+        this.name,
+        this.accompaniesNBA,
+        this.franchise,
+        this.terms,
+        this.array,
+        $evt,
+      );
+    },
+    empty() {
+      this.email = '';
+      this.name = '';
+      this.accompaniesNBA = '';
+      this.franchise = '';
+      this.terms = false;
+      this.array = [];
+    },
+    emptyArray() {
+      this.array = [];
+    },
+    events(teste: string, $evt: Event) {
+      console.log(teste, $evt);
+    },
+  },
+});
 </script>

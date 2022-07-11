@@ -1,6 +1,7 @@
 <template>
   <div>
-    <HeaderApp v-show="showHeader" />
+    <HeaderApp v-if="showHeader" />
+    <button @click="showHeader = !showHeader">Ativar e desativar header</button>
     <UserComponent />
     <TodoList />
     <AppForm />

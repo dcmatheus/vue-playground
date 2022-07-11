@@ -34,7 +34,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import todos from '../utils/todo.json';
+import todosJson from '../utils/todo.json';
 
 interface Todo {
   userId: number;
@@ -47,11 +47,11 @@ export default defineComponent({
   name: 'TodoList',
   data() {
     return {
-      todos: todos[0],
+      todos: todosJson[0],
       styles: ['bg', 'light'],
       pages: {
         currentPage: 1,
-        totalOfPages: todos.length,
+        totalOfPages: todosJson.length,
       },
     };
   },
@@ -60,7 +60,7 @@ export default defineComponent({
       return this.todos.filter((todo) => todo.completed);
     },
     totalOfPages(): number {
-      return todos.length;
+      return todosJson.length;
     },
   },
   methods: {
@@ -71,7 +71,7 @@ export default defineComponent({
   watch: {
     pages: {
       handler(pages: { currentPage: number; totalOfPages: number }) {
-        this.todos = todos[pages.currentPage - 1];
+        this.todos = todosJson[pages.currentPage - 1];
       },
       deep: true,
     },

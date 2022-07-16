@@ -1,3 +1,33 @@
+<script setup lang="ts">
+import {
+  computed, reactive, ref, watch,
+} from 'vue';
+import todosJson from '../utils/todo.json';
+
+const styles = ['bg', 'light'];
+const todos = ref(todosJson[0]);
+const pages = reactive({
+  currentPage: 1,
+  totalPages: todosJson.length,
+});
+const completedTodos = computed(() => todos.value.filter((todo) => todo.completed));
+
+function changePage(page: number) {
+  pages.currentPage = page;
+}
+
+watch(todos, (newValue, oldValue) => {
+  console.log('Todos:', newValue);
+  console.log('Todos antes:', oldValue);
+});
+
+watch(pages, (newValue, oldValue) => {
+  console.log('Páginas:', newValue);
+  console.log('Páginas antes:', oldValue);
+  todos.value = todosJson[pages.currentPage - 1];
+});
+</script>
+
 <template>
   <div>
     <div>
@@ -17,7 +47,7 @@
     <div>
       <span>Página:</span>
       <button
-        v-for="page in pages.totalOfPages"
+        v-for="page in pages.totalPages"
         :key="page"
         @click="() => changePage(page)"
         :class="['page', page === pages.currentPage && 'active']"
@@ -31,56 +61,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-import todosJson from '../utils/todo.json';
-
-interface Todo {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
-
-export default defineComponent({
-  name: 'TodoList',
-  data() {
-    return {
-      todos: todosJson[0],
-      styles: ['bg', 'light'],
-      pages: {
-        currentPage: 1,
-        totalOfPages: todosJson.length,
-      },
-    };
-  },
-  computed: {
-    completedTodos(): Todo[] {
-      return this.todos.filter((todo) => todo.completed);
-    },
-    totalOfPages(): number {
-      return todosJson.length;
-    },
-  },
-  methods: {
-    changePage(page: number) {
-      this.pages.currentPage = page;
-    },
-  },
-  watch: {
-    pages: {
-      handler(pages: { currentPage: number; totalOfPages: number }) {
-        this.todos = todosJson[pages.currentPage - 1];
-      },
-      deep: true,
-    },
-    todos(newVal, oldVal) {
-      console.log(newVal, oldVal);
-    },
-  },
-});
-</script>
 
 <style scoped>
 .bg {

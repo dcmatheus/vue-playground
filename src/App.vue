@@ -4,6 +4,7 @@ import AppForm from './components/AppForm.vue';
 import TodoList from './components/TodoList.vue';
 import HeaderApp from './components/HeaderApp.vue';
 import UserComponent from './components/UserComponent.vue';
+import ContentCard from './components/ContentCard.vue';
 
 const showHeader = ref(true);
 </script>
@@ -15,6 +16,11 @@ const showHeader = ref(true);
     <UserComponent />
     <TodoList />
     <AppForm />
+    <ContentCard>
+      <template v-slot:title>Title</template>
+      <template v-slot:subtitle>subtitle</template>
+      Content
+    </ContentCard>
   </div>
 </template>
 

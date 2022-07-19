@@ -1,0 +1,38 @@
+<script setup lang="ts">
+import { computed, defineProps } from 'vue';
+
+interface Props {
+  variant?: 'success' | 'danger' | 'warning' | 'info';
+}
+
+const props = defineProps<Props>();
+
+const computedVariant = computed(() => (props.variant ? `alert-${props.variant}` : ''));
+
+</script>
+<template>
+<div :class="`alert ${computedVariant}`">
+  Seu formulário foi enviado com sucesso!
+</div>
+</template>
+
+<style scoped>
+
+.alert {
+  padding: 5px;
+  border-radius : 6px;
+  color: gray;
+  background: #ddd;
+}
+
+.alert-success {
+  background: #42b983;
+  color: #fff;
+}
+
+.alert-danger {
+  background: #f44336;
+  color: #fff;
+}
+
+</style>

@@ -5,6 +5,7 @@ import TodoList from './components/TodoList.vue';
 import HeaderApp from './components/HeaderApp.vue';
 import UserComponent from './components/UserComponent.vue';
 import ContentCard from './components/ContentCard.vue';
+import BaseAlert from './components/BaseAlert.vue';
 
 const showHeader = ref(true);
 </script>
@@ -21,6 +22,7 @@ const showHeader = ref(true);
       <template v-slot:subtitle>subtitle</template>
       Content
     </ContentCard>
+    <BaseAlert variant="success" />
   </div>
 </template>
 

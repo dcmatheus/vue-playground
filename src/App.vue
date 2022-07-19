@@ -8,6 +8,10 @@ import ContentCard from './components/ContentCard.vue';
 import BaseAlert from './components/BaseAlert.vue';
 
 const showHeader = ref(true);
+const showAlert = ref(true);
+
+function CloseAlert() { showAlert.value = false; }
+
 </script>
 
 <template>
@@ -22,7 +26,7 @@ const showHeader = ref(true);
       <template v-slot:subtitle>subtitle</template>
       Content
     </ContentCard>
-    <BaseAlert variant="success" />
+    <BaseAlert v-if="showAlert" @close="CloseAlert" variant="success" />
   </div>
 </template>
 

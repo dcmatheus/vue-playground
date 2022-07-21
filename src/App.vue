@@ -1,33 +1,12 @@
-<script lang="ts" setup>
-import { ref } from 'vue';
-import AppForm from './components/AppForm.vue';
-import TodoList from './components/TodoList.vue';
-import HeaderApp from './components/HeaderApp.vue';
-import UserComponent from './components/UserComponent.vue';
-import ContentCard from './components/ContentCard.vue';
-import BaseAlert from './components/BaseAlert.vue';
-
-const showHeader = ref(true);
-const showAlert = ref(true);
-
-function CloseAlert() { showAlert.value = false; }
-
-</script>
-
 <template>
-  <div>
-    <HeaderApp v-if="showHeader" />
-    <button @click="showHeader = !showHeader">Ativar e desativar header</button>
-    <UserComponent />
-    <TodoList />
-    <AppForm />
-    <ContentCard>
-      <template v-slot:title>Title</template>
-      <template v-slot:subtitle>subtitle</template>
-      Content
-    </ContentCard>
-    <BaseAlert v-if="showAlert" @close="CloseAlert" variant="success" />
-  </div>
+  <nav>
+    <RouterLink to="/">Home</RouterLink>
+    |
+    <RouterLink to="/about">About</RouterLink>
+    |
+    <RouterLink :to="{ name: 'services' }">Serviços</RouterLink>
+  </nav>
+  <RouterView/>
 </template>
 
 <style>
@@ -39,4 +18,19 @@ function CloseAlert() { showAlert.value = false; }
   color: #2c3e50;
   margin-top: 60px;
 }
+</style>
+
+<style scoped>
+nav {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  padding: 30px;
+}
+nav a {
+  color: #2c3e50;
+  text-decoration: none;
+  font-weight: bold;
+}
+
 </style>

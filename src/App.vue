@@ -5,6 +5,8 @@
     <RouterLink to="/about">About</RouterLink>
     |
     <RouterLink :to="{ name: 'services' }">Serviços</RouterLink>
+    |
+    <RouterLink to="/usuario/10">Usuário</RouterLink>
   </nav>
   <RouterView/>
 </template>

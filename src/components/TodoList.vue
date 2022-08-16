@@ -2,15 +2,17 @@
 import {
   computed, reactive, ref, watch,
 } from 'vue';
-import todosJson from '../utils/todo.json';
+import { useStore } from 'vuex';
+
+const { state } = useStore();
 
 const styles = ['bg', 'light'];
-const todos = ref(todosJson[0]);
+const todos = ref(state.todos[0]);
 const pages = reactive({
   currentPage: 1,
-  totalPages: todosJson.length,
+  totalPages: state.todos.length,
 });
-const completedTodos = computed(() => todos.value.filter((todo) => todo.completed));
+const completedTodos = computed(() => todos.value.filter((todo: any) => todo.completed));
 
 function changePage(page: number) {
   pages.currentPage = page;
@@ -24,7 +26,7 @@ watch(todos, (newValue, oldValue) => {
 watch(pages, (newValue, oldValue) => {
   console.log('Páginas:', newValue);
   console.log('Páginas antes:', oldValue);
-  todos.value = todosJson[pages.currentPage - 1];
+  todos.value = state.todos[pages.currentPage - 1];
 });
 </script>
 
@@ -59,6 +61,7 @@ watch(pages, (newValue, oldValue) => {
       <h2>Completas</h2>
       <p v-for="todo in completedTodos" :key="todo.id">{{ todo.title }}</p>
     </div>
+    <code>{{ $store }}</code>
   </div>
 </template>
 

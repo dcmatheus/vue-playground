@@ -4,7 +4,16 @@ import {
 } from 'vue';
 import { useStore } from 'vuex';
 
-const { state } = useStore();
+const { state, commit } = useStore();
+
+function addTodo() {
+  commit('addTodo', {
+    userId: Math.random(),
+    id: Math.random(),
+    title: 'New Todo',
+    completed: false,
+  });
+}
 
 const styles = ['bg', 'light'];
 const todos = ref(state.todos[0]);
@@ -34,6 +43,7 @@ watch(pages, (newValue, oldValue) => {
   <div>
     <div>
       <h2>Lista de tarefas</h2>
+      <button @click="addTodo">Adicionar Tarefa</button>
       <label
         v-for="(todo, index) in todos"
         :class="[...styles, index === 0 && 'first', todo.completed && 'completed']"

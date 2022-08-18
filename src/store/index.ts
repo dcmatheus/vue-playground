@@ -8,6 +8,9 @@ export default createStore({
   getters: {
   },
   mutations: {
+    addTodo(state, todo) {
+      state.todos = [todo, ...state.todos];
+    },
   },
   actions: {
   },

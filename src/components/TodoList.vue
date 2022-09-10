@@ -16,12 +16,18 @@ function addTodo() {
 }
 
 const styles = ['bg', 'light'];
-const todos = ref(state.todos[0]);
+const todos = ref(state.todos);
+const completedTodos = computed(() => todos.value.filter((todo: any) => todo.completed));
+const totalPages = Math.ceil(state.todos.length / 5);
+
 const pages = reactive({
   currentPage: 1,
-  totalPages: state.todos.length,
+  totalPages,
 });
-const completedTodos = computed(() => todos.value.filter((todo: any) => todo.completed));
+
+const todosOfPages = ref(todos.value.slice(pages.currentPage * 5 - 5, pages.currentPage * 5));
+
+console.log(todosOfPages);
 
 function changePage(page: number) {
   pages.currentPage = page;
@@ -35,7 +41,7 @@ watch(todos, (newValue, oldValue) => {
 watch(pages, (newValue, oldValue) => {
   console.log('Páginas:', newValue);
   console.log('Páginas antes:', oldValue);
-  todos.value = state.todos[pages.currentPage - 1];
+  todosOfPages.value = todos.value.slice(pages.currentPage * 5 - 5, pages.currentPage * 5);
 });
 </script>
 
@@ -45,7 +51,7 @@ watch(pages, (newValue, oldValue) => {
       <h2>Lista de tarefas</h2>
       <button @click="addTodo">Adicionar Tarefa</button>
       <label
-        v-for="(todo, index) in todos"
+        v-for="(todo, index) in todosOfPages"
         :class="[...styles, index === 0 && 'first', todo.completed && 'completed']"
         style="font-size: 1.2rem; display: block"
         :style="{ margin: '1rem' }"
@@ -71,7 +77,6 @@ watch(pages, (newValue, oldValue) => {
       <h2>Completas</h2>
       <p v-for="todo in completedTodos" :key="todo.id">{{ todo.title }}</p>
     </div>
-    <code>{{ $store }}</code>
   </div>
 </template>
 
